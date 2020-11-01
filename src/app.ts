@@ -4,13 +4,17 @@ import cors from "cors";
 import helmet from "helmet";
 import dotenv from "dotenv";
 
+import routes from './routes';
+
 class App {
     public app: Application;
     constructor() {
         this.app = express();
         dotenv.config();
         this.config();
+        routes.load(this.app);
     }
+
     private config(): void {
         this.app.use(helmet());
         this.app.use(cors());
