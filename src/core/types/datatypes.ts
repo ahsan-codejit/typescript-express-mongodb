@@ -11,3 +11,7 @@ export interface VentureOwner extends Employee {
 export interface VentureParticipant extends Employee {
     role: Roles
 }
+
+export interface VentureUpdateOptions {
+    [propName: string]: any
+}
