@@ -8,7 +8,7 @@ let load = (app: Application) => {
         return res.status(200).json({ message: 'Welcome to venture apis' });
     });
     app.get('*', function (req, res) {
-        res.status(404).send("Sorry, the requested api is not found");
+        return res.status(404).send("Sorry, the requested api is not found");
     });
 }
 

@@ -10,7 +10,7 @@
     "test": "jest --setupFiles dotenv/config",
     "test:watch": "jest --setupFiles dotenv/config --watch",
     "test:coverage": "jest --setupFiles dotenv/config --coverage",
-    "test:coverage:watch": "jest --setupFiles dotenv/config --coverage --watch"
+    "test:coverage:watch": "jest --setupFiles dotenv/config --coverage --watchAll"
   },
   "repository": {
     "type": "git",
