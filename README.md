@@ -30,7 +30,6 @@ Test commands are
 - npm run start:dev (dev mood)
 
 server will start with default 3000 port on url http://localhost:3001
-It will also create 3 agents into mongodb for demo purpose if all go well.
 
 ## Apis 
 - GET /api/venture (to get list of ventures)
