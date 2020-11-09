@@ -15,9 +15,10 @@ Run following commands
 - npm install 
 
 ## Settings
-Add mongo url and port in /src/config/index.ts 
+Add mongo url and port in /.env
 - Default port is 3001 
-- mongo url is "mongodb://localhost:27017/venturemanager"
+- Default mongo url is "mongodb://localhost:27017/venturemanager"
+- create a file called '.env' in root directory with settings content follows .env.example
 
 ## Test and Coverage
 Test commands are
