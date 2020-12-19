@@ -3,10 +3,10 @@ Dockerised rest api example using Nodejs, TypeScript, Expressjs, MongoDB etc
 
 ## Requirements
 - nodejs [https://nodejs.org/en/download/package-manager/]
-- mongodb , follow https://docs.mongodb.com/manual/installation/ , or run mongo with docker as follows
-  - sudo docker pull mongo
-  - sudo docker run -it -v mongodata:/data/db -p 27017:27017 --name mongodb -d mongo
+- MongoDB installed
 - Git
+- Docker if the project is run by docker-compose, in that case, mongodb is not required.
+  docker-compose includes mongo
 
 ## App Instructions
 Run following commands
@@ -16,7 +16,7 @@ Run following commands
 
 ## Settings
 Add mongo url and port in /.env
-- Default port is 3001 
+- Default port is 5000 
 - Default mongo url is "mongodb://localhost:27017/venturemanager"
 - create a file called '.env' in root directory with settings content follows .env.example
 
@@ -30,7 +30,11 @@ Test commands are
 - npm start
 - npm run start:dev (dev mood)
 
-server will start with default 3000 port on url http://localhost:3001
+## Run app with docker compose
+- docker-compose build
+- docker-compose up -d
+
+server will start with default 5000 port on url http://localhost:5000
 
 ## Apis 
 - GET /api/venture (to get list of ventures)

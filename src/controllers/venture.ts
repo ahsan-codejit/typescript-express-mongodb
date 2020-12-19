@@ -8,13 +8,9 @@ import UpdaterService from '../repositories/services/updater';
 import FinderService from '../repositories/services/finder';
 //models
 import VentureModel from '../repositories/models/venture';
-// we will improve these responses later
-import {
-    InternalErrorResponse, CreateSuccessResponse,
-    UpdateSuccessResponse, SuccessResponse,
-    ErrorResponse, STATUS_ENUM
-} from '../lib/responses';
-export default class VentureController {
+
+import BaseController from "./base";
+export default class VentureController extends BaseController {
     public async create(req: Request, res: Response): Promise<any> {
 
         try {
@@ -22,12 +18,10 @@ export default class VentureController {
             //call repo to create
             let creatorService = new CreatorService();
             let serviceResponse = await creatorService.create(venture, VentureModel);
-            if (!serviceResponse) {
-                CreateSuccessResponse.status = STATUS_ENUM.ERROR;
-            }
-            return res.status(CreateSuccessResponse.statusCode).json(CreateSuccessResponse);
+
+            return this.createSuccess(res, serviceResponse);
         } catch (error) {
-            return res.status(InternalErrorResponse.statusCode).json(InternalErrorResponse);
+            this.fail500(res, error);
         }
     }
 
@@ -39,12 +33,9 @@ export default class VentureController {
             let updaterService = new UpdaterService();
             //will add id validation checking later
             let serviceResponse = await updaterService.update(req.params.id, venture, VentureModel);
-            if (!serviceResponse) {
-                UpdateSuccessResponse.status = STATUS_ENUM.ERROR;
-            }
-            return res.status(UpdateSuccessResponse.statusCode).json(UpdateSuccessResponse);
+            return this.success(res, serviceResponse);
         } catch (error) {
-            return res.status(InternalErrorResponse.statusCode).json(InternalErrorResponse);
+            return this.fail500(res, error);
         }
     }
 
@@ -53,10 +44,10 @@ export default class VentureController {
             let query = { id: req.params.id }
             let finder = new FinderService(VentureModel);
             let venture = await finder.findOne(query);
-            let response = { ...SuccessResponse, data: venture };
-            res.status(SuccessResponse.statusCode).json(response);
+            let response = { data: venture };
+            return this.success(res, response);
         } catch (error) {
-            return res.status(ErrorResponse.statusCode).json(ErrorResponse);
+            return this.fail500(res, error);
         }
     }
 
@@ -65,11 +56,10 @@ export default class VentureController {
             let query = {}
             let finder = new FinderService(VentureModel);
             let ventures = await finder.find(query);
-            let response = { ...SuccessResponse };
-            response.data = ventures;
-            return res.status(SuccessResponse.statusCode).json(response);
-        } catch (err) {
-            return res.status(ErrorResponse.statusCode).json(ErrorResponse);
+            let response = { data: ventures };
+            return this.success(res, response);
+        } catch (error) {
+            return this.fail500(res, error);
         }
     }
 }
